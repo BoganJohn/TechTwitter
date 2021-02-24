@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <title>Feed</title>
+
+    <div th:replace="/fragments/styling :: head-style" ></div>
+</head>
+
+<body>
+    <div class="container">
+        <div th:replace="fragments/navbar :: navbar" ></div>
+
+        <h2>Tweets</h2>
+        <div th:each="tweet:${tweetList}">
+<!--            <h5>@<span th:text="${tweet.user.username}"></span>-->
+<!--                <small><span th:text="${#dates.format(tweet.createdAt, 'M/d/yy HH:mm')}"></span></small>-->
+<!--            </h5>-->
+            <a th:href="@{/users/} + ${tweet.user.username}">
+                <h5 class="mb-1" style="color: #00aced"><i class="fab fa-twitter"></i> @<span th:text="${tweet.user.username}"></span>
+                    <small><span th:text="${#dates.format(tweet.createdAt, 'M/d/yy HH:mm')}"></span></small></h5>
+            </a>
+            <p th:utext="${tweet.message}"></p>
+        </div>
+    </div>
+
+    <div th:replace="/fragments/styling :: body-links" ></div>
+</body>
+
+</html>
